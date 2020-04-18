@@ -9,12 +9,14 @@ namespace Entities.Player
             float xInput = Input.GetAxis("Horizontal");
             float yInput = Input.GetAxis("Vertical");
             bool jumpInput = Input.GetButton("Jump");
+            bool vineInput = Input.GetButton("Vine");
 
             return new PlayerInput
             {
                 XInput = xInput,
                 YInput = yInput,
-                JumpInput = jumpInput
+                JumpInput = jumpInput,
+                VineInput = vineInput
             };
         }
     }
