@@ -21,12 +21,9 @@ namespace Entity.Base
         [NonSerialized] public Vector3 LastVelocity = Vector3.zero;
         [NonSerialized] public BoxCollider2D BoxCollider;
 
-        private Animator _animController;
-
         private void Awake()
         {
             BoxCollider = GetComponent<BoxCollider2D>();
-            _animController = GetComponent<Animator>();
             BaseEntityManager.Instance.AddEntity(this);
         }
 

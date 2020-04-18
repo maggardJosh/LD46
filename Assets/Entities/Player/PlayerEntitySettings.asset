@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   XBounceValue: 0
   YBounceValue: 0
-  MaxXVel: 5
-  MinYVel: -5
-  MaxYVel: 10
-  GroundFriction: 0.7
-  Friction: 1
+  MaxXVel: 10
+  MinYVel: -10
+  MaxYVel: 30
+  GroundFriction: 0.847
+  Friction: 0.89
   ObeysGravity: 1
   CollideMask:
     serializedVersion: 2
