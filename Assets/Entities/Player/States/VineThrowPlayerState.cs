@@ -28,14 +28,14 @@ namespace Entities.Player.States
             Controller.AnimController.SetVineThrow(false);
         }
 
-        public override void HandleUpdate()
+        protected override void HandleUpdateInternal()
         {
             Controller.Entity.SetVelocity(Vector3.zero);
             Controller.transform.position = pos;
         }
 
         private bool _hasEnteredThrowAnim = false;
-        public override void HandleFixedUpdate()
+        protected override void HandleFixedUpdateInternal()
         {
             if (!_hasEnteredThrowAnim)
             {

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: player_vineUpRetrieve
+  m_Name: player_slam
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 44517457659489604, guid: 1b1608723333c524e831ff9d3d5160c1, type: 3}
+      value: {fileID: -3792404652326970167, guid: 1b1608723333c524e831ff9d3d5160c1,
+        type: 3}
     - time: 0.083333336
-      value: {fileID: 44517457659489604, guid: 1b1608723333c524e831ff9d3d5160c1, type: 3}
+      value: {fileID: -3792404652326970167, guid: 1b1608723333c524e831ff9d3d5160c1,
+        type: 3}
     attribute: m_Sprite
     path: Sprite
     classID: 212
@@ -42,8 +44,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 44517457659489604, guid: 1b1608723333c524e831ff9d3d5160c1, type: 3}
-    - {fileID: 44517457659489604, guid: 1b1608723333c524e831ff9d3d5160c1, type: 3}
+    - {fileID: -3792404652326970167, guid: 1b1608723333c524e831ff9d3d5160c1, type: 3}
+    - {fileID: -3792404652326970167, guid: 1b1608723333c524e831ff9d3d5160c1, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

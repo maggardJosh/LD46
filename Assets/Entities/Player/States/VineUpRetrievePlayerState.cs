@@ -28,12 +28,12 @@ namespace Entities.Player.States
             Controller.Entity.enabled = true;
         }
         
-        public override void HandleUpdate()
+        protected override void HandleUpdateInternal()
         {
             Controller.Entity.SetVelocity(Vector3.zero);
         }
         
-        public override void HandleFixedUpdate()
+        protected override void HandleFixedUpdateInternal()
         {
             var diff = Vector3.down;
             if (_returnVineToPlayer)

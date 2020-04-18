@@ -10,23 +10,40 @@ namespace Entities.Player.States
         private float _timeSinceGrounded = float.MaxValue;
         private float _jumpBuffered = float.MaxValue;
             
-        public override void HandleUpdate()
+        protected override void HandleUpdateInternal()
         {
             if (Controller.CurrentInput.JumpInput && !Controller.LastInput.JumpInput)
                 _jumpBuffered = 0;
         }
 
-        public override void HandleFixedUpdate()
+        protected override void HandleFixedUpdateInternal()
         {
             HandleXInput(Controller.CurrentInput.XInput);
                 
             HandleJumpLogic();
 
-            if (Controller.CanVine && HandleVineLogic())
+            if (Controller.CanSlam && HandleSlamLogic())
+                return;
+            if (HandleVineLogic())
                 return;
             
             UpdateAnimator();
                 
+        }
+
+        private bool HandleSlamLogic()
+        {
+            if (Controller.Entity.LastHitResult.HitDown)
+                return false;
+
+            if (Controller.CurrentInput.YInput >= 0)
+                return false;
+            
+            if (!Controller.CurrentInput.VineInput || Controller.LastInput.VineInput) 
+                return false;
+            
+            Controller.SetPlayerState(new SlamPlayerState(Controller));
+            return true;
         }
 
         private bool HandleVineLogic()
@@ -36,15 +53,28 @@ namespace Entities.Player.States
             
             if (!Controller.CurrentInput.VineInput || Controller.LastInput.VineInput) 
                 return false;
-            
-            if(Controller.CurrentInput.YInput > 0)
-                Controller.SetPlayerState(new VineUpThrowPlayerState(Controller));
+
+            if (Controller.CurrentInput.YInput > 0)
+                Controller.SetPlayerState(GetUpAttackState());
             else
-                Controller.SetPlayerState(new VineThrowPlayerState(Controller, Controller.SRend.flipX ? Vector2.left : Vector2.right));
+                Controller.SetPlayerState(GetAttackState());
             return true;
 
         }
 
+        private PlayerState GetUpAttackState()
+        {
+            if(Controller.CanVine)
+                return new VineUpThrowPlayerState(Controller);
+            return new UpAttackPlayerState(Controller);
+        }
+
+        private PlayerState GetAttackState()
+        {
+            if (Controller.CanVine)
+                return new VineThrowPlayerState(Controller, Controller.SRend.flipX ? Vector2.left : Vector2.right);
+            return new AttackPlayerState(Controller);
+        }
 
         private void UpdateAnimator()
         {
@@ -86,12 +116,10 @@ namespace Entities.Player.States
             {
                 if (_timeSinceGrounded < Controller.settings.allowedTimeSinceGroundedToJump)
                 {
-                    Debug.Log("Standard");
                     Jump();
                 }
                 else if (!_hasDoubleJumped)
                 {
-                    Debug.Log("Double");
                     _hasDoubleJumped = true;
                     Jump();   
                     SpawnDoubleJumpEffect();

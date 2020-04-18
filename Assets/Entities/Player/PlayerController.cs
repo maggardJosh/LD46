@@ -18,6 +18,7 @@
             [NonSerialized] public DebugLoggerBehavior Logger;
 
             public bool CanVine = true;
+            public bool CanSlam = true;
             public bool CanDoubleJump = true;
 
             public GameObject doubleJumpEffect;

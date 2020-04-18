@@ -21,3 +21,4 @@ MonoBehaviour:
     type: 3}
   shovelGrappleUpPrefab: {fileID: 5714797967693757583, guid: 4b178047d33714946b36c542b9e918e2,
     type: 3}
+  slamSpeed: -20

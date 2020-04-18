@@ -1,4 +1,6 @@
-﻿namespace Entities.Player.States
+﻿using UnityEngine;
+
+namespace Entities.Player.States
 {
     public abstract class PlayerState
     {
@@ -9,8 +11,20 @@
             Controller = controller;
         }
 
-        public abstract void HandleUpdate();
-        public abstract void HandleFixedUpdate();
+        protected float timeInState = 0;
+
+        public void HandleUpdate()
+        {
+            HandleUpdateInternal();
+        }
+
+        public void HandleFixedUpdate()
+        {
+            timeInState += Time.fixedDeltaTime;
+            HandleFixedUpdateInternal();
+        }
+        protected abstract void HandleUpdateInternal();
+        protected abstract void HandleFixedUpdateInternal();
 
 
         public void OnExitState()
