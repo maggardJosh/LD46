@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   tileSize: 16
-  collisionOffsetValue: 0.1
+  collisionOffsetValue: 0.05
   gravity: 1
-  minYVel: -5
-  bgColor: {r: 0, g: 0, b: 0, a: 0}
