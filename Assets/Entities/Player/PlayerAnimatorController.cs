@@ -10,6 +10,8 @@ namespace Entities.Player
         private static readonly int Grounded = Animator.StringToHash("Grounded");
         private static readonly int VineThrow = Animator.StringToHash("VineThrow");
         private static readonly int VineRetrieve = Animator.StringToHash("VineRetrieve");
+        private static readonly int VineUpThrow = Animator.StringToHash("VineUpThrow");
+        private static readonly int VineUpRetrieve = Animator.StringToHash("VineUpRetrieve");
 
         public PlayerAnimatorController(Animator animator)
         {
@@ -49,6 +51,16 @@ namespace Entities.Player
         public void SetVineRetrieve(bool vineRetrieve)
         {
             _animator.SetBool(VineRetrieve, vineRetrieve);
+        }
+        
+        public void SetVineUpThrow(bool vineThrow)
+        {
+            _animator.SetBool(VineUpThrow, vineThrow);
+        }
+
+        public void SetVineUpRetrieve(bool vineRetrieve)
+        {
+            _animator.SetBool(VineUpRetrieve, vineRetrieve);
         }
     }
 }

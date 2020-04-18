@@ -3,16 +3,14 @@ using UnityEngine;
 
 namespace Entities.Player.States
 {
-    public class VineThrowPlayerState : PlayerState
+    public class VineUpThrowPlayerState : PlayerState
     {
-        private readonly Vector2 _direction;
         private Vector3 _startingVelocity;
         private ShovelGrappleHook _hook;
 
         private Vector3 pos;
-        public VineThrowPlayerState(PlayerController controller, Vector2 direction) : base(controller)
+        public VineUpThrowPlayerState(PlayerController controller) : base(controller)
         {
-            _direction = direction;
             _startingVelocity = controller.Entity.GetVelocity();
             pos = controller.transform.position;
 
@@ -20,12 +18,12 @@ namespace Entities.Player.States
 
         protected override void HandleEnter()
         {
-            Controller.AnimController.SetVineThrow(true);
+            Controller.AnimController.SetVineUpThrow(true);
         }
 
         protected override void HandleExit()
         {
-            Controller.AnimController.SetVineThrow(false);
+            Controller.AnimController.SetVineUpThrow(false);
         }
 
         public override void HandleUpdate()
@@ -39,23 +37,23 @@ namespace Entities.Player.States
         {
             if (!_hasEnteredThrowAnim)
             {
-                if (Controller.AnimController.InAnimation("player_vineThrow"))
+                if (Controller.AnimController.InAnimation("player_vineUpThrow"))
                     _hasEnteredThrowAnim = true;
                 return;
             }
 
             if (_hook == null && Controller.AnimController.AnimationDone())
             {
-                var hookOffset = Controller.grappleHookAnchor.transform.localPosition;
+                var offset = Controller.grappleHookUpAnchor.localPosition;
                 if (Controller.SRend.flipX)
-                    hookOffset = hookOffset.Flip();
-                var hook = Object.Instantiate(Controller.settings.shovelGrapplePrefab,
-                    Controller.transform.position +  hookOffset,
-                    Quaternion.Euler(new Vector3(0, 0, Controller.SRend.flipX ? 180 : 0)));
+                    offset = offset.Flip();
+                var hook = Object.Instantiate(Controller.settings.shovelGrappleUpPrefab,
+                    Controller.transform.position + offset,
+                    Quaternion.identity);
                 _hook = hook.GetComponent<ShovelGrappleHook>();
                 _hook.OnReturnHook += hitSomething =>
-                    Controller.SetPlayerState(new VineRetrievePlayerState(Controller, !hitSomething, _hook));
-                _hook.ShootGrapple(Controller);
+                    Controller.SetPlayerState(new VineUpRetrievePlayerState(Controller, !hitSomething, _hook));
+                _hook.ShootGrappleUp(Controller);
             }
         }
     }

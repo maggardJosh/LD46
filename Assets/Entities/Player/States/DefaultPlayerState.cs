@@ -30,10 +30,16 @@ namespace Entities.Player.States
 
         private bool HandleVineLogic()
         {
+            if (!Controller.Entity.LastHitResult.HitDown)
+                return false;
+            
             if (!Controller.CurrentInput.VineInput || Controller.LastInput.VineInput) 
                 return false;
             
-            Controller.SetPlayerState(new VineThrowPlayerState(Controller, Controller.SRend.flipX ? Vector2.left : Vector2.right));
+            if(Controller.CurrentInput.YInput > 0)
+                Controller.SetPlayerState(new VineUpThrowPlayerState(Controller));
+            else
+                Controller.SetPlayerState(new VineThrowPlayerState(Controller, Controller.SRend.flipX ? Vector2.left : Vector2.right));
             return true;
 
         }

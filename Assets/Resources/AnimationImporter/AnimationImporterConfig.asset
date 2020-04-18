@@ -15,6 +15,7 @@ MonoBehaviour:
   _animationNamesThatDoNotLoop:
   - death
   - vineThrow
+  - vineUpThrow
   _automaticImporting: 0
   _spritePixelsPerUnit: 16
   _targetObjectType: 0

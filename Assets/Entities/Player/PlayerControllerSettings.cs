@@ -12,5 +12,6 @@ namespace Entities.Player
         public float jumpLetGoMultiplier = .7f;
         public float jumpBufferLength = .2f;
         public GameObject shovelGrapplePrefab;
+        public GameObject shovelGrappleUpPrefab;
     }
 }

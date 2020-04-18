@@ -12,12 +12,13 @@ namespace Entities.Player
         public float length = 5f;
 
         private Vector3 _startPos;
+        private Vector3 _offset;
 
         public delegate void ReturnHook(bool hitSomething);
 
         public event ReturnHook OnReturnHook ;
 
-        void Start()
+        void Awake()
         {
             _baseEntity = GetComponent<BaseEntity>();
             _startPos = transform.position;
@@ -28,15 +29,42 @@ namespace Entities.Player
         public SpriteRenderer vine;
         
         private bool _hasBeenActivated = false;
+        private Vector3 _direction;
+
+        private void ShootGrapple(PlayerController controller, Vector3 direction)
+        {
+            _direction = direction;
+            _controller = controller;
+            _offset = transform.position - controller.transform.position;
+
+            if (CollidesWithWallInstantly())
+            {
+                OnReturnHook?.Invoke(false);
+                return;
+            }
+
+            _hasBeenActivated = true;
+        }
+
+        private bool CollidesWithWallInstantly()
+        {
+            var result = _baseEntity.GetMoveTester().GetMoveResult(transform.position - _direction * .1f, _direction * .1f);
+            return result.HitAny;
+        }
+
         public void ShootGrapple(PlayerController controller)
         {
-            _controller = controller;
-            _hasBeenActivated = true;
+            ShootGrapple(controller, Vector3.right);
+        }
+
+        public void ShootGrappleUp(PlayerController controller)
+        {
+            ShootGrapple(controller, Vector3.up);
         }
 
         void Update()
         {
-            Vector3 diff = transform.position - _controller.transform.position;
+            Vector3 diff = transform.position - (_controller.transform.position + _offset);
             var s = vine.size;
             s.x = diff.magnitude;
             vine.size = s;
@@ -44,7 +72,7 @@ namespace Entities.Player
             if (!_hasBeenActivated)
                 return;
             
-            _baseEntity.SetVelocity(transform.rotation * Vector3.right * speed);
+            _baseEntity.SetVelocity(transform.rotation * _direction * speed);
 
             if (_baseEntity.LastHitResult.HitAny)
             {
@@ -57,6 +85,7 @@ namespace Entities.Player
             if (dist > length * length)
             {
                 OnReturnHook?.Invoke(false);
+                _baseEntity.SetVelocity(Vector3.zero);
                 _hasBeenActivated = false;
             }
         }

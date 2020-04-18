@@ -17,7 +17,7 @@ MonoBehaviour:
   MaxXVel: 10
   MinYVel: -10
   MaxYVel: 30
-  GroundFriction: 0.847
+  GroundFriction: 0.371
   Friction: 0.89
   ObeysGravity: 1
   CollideMask:

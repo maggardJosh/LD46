@@ -50,6 +50,21 @@ TextureImporter:
   - first:
       213: 467225222035841359
     second: player 15
+  - first:
+      213: -7534502488872115512
+    second: player 16
+  - first:
+      213: 1416290560182341688
+    second: player 17
+  - first:
+      213: -1790957030419581402
+    second: player 18
+  - first:
+      213: -5189330532512644507
+    second: player 19
+  - first:
+      213: -1651153686005881018
+    second: player 20
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -174,7 +189,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 48
         width: 48
         height: 16
       alignment: 7
@@ -195,7 +210,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 32
+        y: 48
         width: 48
         height: 16
       alignment: 7
@@ -216,7 +231,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 48
         width: 48
         height: 16
       alignment: 7
@@ -237,7 +252,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 32
+        y: 48
         width: 48
         height: 16
       alignment: 7
@@ -258,7 +273,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 48
         width: 48
         height: 16
       alignment: 7
@@ -279,7 +294,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 144
-        y: 32
+        y: 48
         width: 48
         height: 16
       alignment: 7
@@ -300,7 +315,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 32
+        y: 48
         width: 48
         height: 16
       alignment: 7
@@ -321,7 +336,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
+        y: 32
         width: 48
         height: 16
       alignment: 7
@@ -342,7 +357,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 16
+        y: 32
         width: 48
         height: 16
       alignment: 7
@@ -363,7 +378,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 16
+        y: 32
         width: 48
         height: 16
       alignment: 7
@@ -384,7 +399,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 144
-        y: 16
+        y: 32
         width: 48
         height: 16
       alignment: 7
@@ -405,7 +420,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
+        y: 32
         width: 48
         height: 16
       alignment: 7
@@ -426,7 +441,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 16
         width: 48
         height: 16
       alignment: 7
@@ -447,7 +462,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 0
+        y: 16
         width: 48
         height: 16
       alignment: 7
@@ -468,7 +483,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 0
+        y: 16
         width: 48
         height: 16
       alignment: 7
@@ -489,7 +504,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 144
-        y: 16
+        y: 32
         width: 48
         height: 16
       alignment: 7
@@ -501,6 +516,111 @@ TextureImporter:
       bones: []
       spriteID: 
       internalID: 467225222035841359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player 16
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 16
+        width: 48
+        height: 16
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: -7534502488872115512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player 17
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 16
+        width: 48
+        height: 16
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: 1416290560182341688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player 18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 48
+        height: 16
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: -1790957030419581402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player 19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 48
+        height: 16
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: -5189330532512644507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player 20
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 48
+        height: 16
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: -1651153686005881018
       vertices: []
       indices: 
       edges: []

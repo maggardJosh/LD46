@@ -18,6 +18,7 @@
             [NonSerialized] public DebugLoggerBehavior Logger;
 
             public GameObject grappleHookAnchor;
+            public Transform grappleHookUpAnchor;
 
             public PlayerControllerSettings settings;
             
