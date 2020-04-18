@@ -19,11 +19,13 @@ namespace Entities.Player.States
         protected override void HandleEnter()
         {
             Controller.AnimController.SetVineUpRetrieve(true);
+            Controller.Entity.enabled = false;
         }
 
         protected override void HandleExit()
         {
             Controller.AnimController.SetVineUpRetrieve(false);
+            Controller.Entity.enabled = true;
         }
         
         public override void HandleUpdate()
@@ -44,7 +46,7 @@ namespace Entities.Player.States
                 Controller.transform.position -= diff * _hook.speed * Time.fixedDeltaTime;
             }
 
-            if (Mathf.Abs((_hook.transform.position - Controller.transform.position).y) < .2f)
+            if (Mathf.Abs((_hook.transform.position - Controller.transform.position).y) < .4f)
             {
                 Controller.SetPlayerState(new DefaultPlayerState(Controller));
                 Object.Destroy(_hook.gameObject);
