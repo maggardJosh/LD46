@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Extensions;
+using UnityEngine;
 
 namespace Entities.Player.States
 {
@@ -6,12 +7,15 @@ namespace Entities.Player.States
     {
         private readonly Vector2 _direction;
         private Vector3 _startingVelocity;
+        private ShovelGrappleHook _hook;
 
+        private Vector3 pos;
         public VineThrowPlayerState(PlayerController controller, Vector2 direction) : base(controller)
         {
             _direction = direction;
             _startingVelocity = controller.Entity.GetVelocity();
-            
+            pos = controller.transform.position;
+
         }
 
         protected override void HandleEnter()
@@ -27,6 +31,7 @@ namespace Entities.Player.States
         public override void HandleUpdate()
         {
             Controller.Entity.SetVelocity(Vector3.zero);
+            Controller.transform.position = pos;
         }
 
         private bool _hasEnteredThrowAnim = false;
@@ -39,10 +44,18 @@ namespace Entities.Player.States
                 return;
             }
 
-            if (Controller.AnimController.AnimationDone())
+            if (_hook == null && Controller.AnimController.AnimationDone())
             {
-                //TODO: Actually throw vine shovel here
-                Controller.SetPlayerState(new VineRetrievePlayerState(Controller, true));
+                var hookOffset = Controller.grappleHookAnchor.transform.localPosition;
+                if (Controller.SRend.flipX)
+                    hookOffset = hookOffset.Flip();
+                var hook = Object.Instantiate(Controller.settings.shovelGrapplePrefab,
+                    Controller.transform.position +  hookOffset,
+                    Quaternion.Euler(new Vector3(0, 0, Controller.SRend.flipX ? 180 : 0)));
+                _hook = hook.GetComponent<ShovelGrappleHook>();
+                _hook.ShootGrapple(Controller);
+                _hook.OnReturnHook += hitSomething =>
+                    Controller.SetPlayerState(new VineRetrievePlayerState(Controller, !hitSomething, _hook));
             }
         }
     }

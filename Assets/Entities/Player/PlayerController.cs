@@ -17,6 +17,8 @@
             [NonSerialized] public SpriteRenderer SRend;
             [NonSerialized] public DebugLoggerBehavior Logger;
 
+            public GameObject grappleHookAnchor;
+
             public PlayerControllerSettings settings;
             
             private void Start()

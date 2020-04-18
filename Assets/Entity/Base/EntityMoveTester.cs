@@ -58,7 +58,7 @@ namespace Entity.Base
                 throw new ArgumentException("TryRaycastHorizontal: Direction vector not normalized");
 
             float numSections = _collider.bounds.size.y / GameSettings.TileSize + 1;
-            Vector3 center = _result.NewPos + _collider.offset.ToVector3();
+            Vector3 center = _result.NewPos + _collider.transform.rotation * _collider.offset.ToVector3();
             Vector2 raycastDir = direction * _collider.bounds.size.x / 2;
 
             _result.NewPos = GetResultPosHorizontal(_result.NewPos, numSections, center, raycastDir);
@@ -104,7 +104,7 @@ namespace Entity.Base
                 throw new ArgumentException("TryRaycastVertical: Direction vector not normalized");
 
             float numSections = _collider.bounds.size.x / GameSettings.TileSize + 1;
-            Vector3 center = _result.NewPos + _collider.offset.ToVector3();
+            Vector3 center = _result.NewPos + _collider.transform.rotation * _collider.offset.ToVector3();
             Vector2 raycastDir = direction * _collider.bounds.size.y / 2;
 
             _result.NewPos = GetResultPosVertical(_result.NewPos, numSections, center, raycastDir);
@@ -147,7 +147,7 @@ namespace Entity.Base
                 _result.HitUp = true;
             else
                 _result.HitDown = true;
-            return new Vector3(_result.NewPos.x, hits.First().point.y + (-_collider.offset.y)) - new Vector3(raycastDir.x, raycastDir.y);
+            return new Vector3(_result.NewPos.x, hits.First().point.y + (-( _collider.transform.rotation * _collider.offset).y)) - new Vector3(raycastDir.x, raycastDir.y);
         }
 
         private Vector3 GetCollisionPositionHorizontal(Vector2 raycastOrig, Vector2 raycastDir)
@@ -166,7 +166,7 @@ namespace Entity.Base
                 _result.HitRight = true;
             else
                 _result.HitLeft = true;
-            return new Vector3(hits.First().point.x + (-_collider.offset.x), _result.NewPos.y) - new Vector3(raycastDir.x, raycastDir.y);
+            return new Vector3(hits.First().point.x + (-( _collider.transform.rotation * _collider.offset).x), _result.NewPos.y) - new Vector3(raycastDir.x, raycastDir.y);
         }
 
         private void TryMoveHorizontal(Vector3 amount)
@@ -182,7 +182,7 @@ namespace Entity.Base
                 //i==0 top side corner
                 //i==1 bottom side corner
                 float ySectionValue = Mathf.Min(i * GameSettings.TileSize, _collider.bounds.size.y - GameSettings.CollisionOffsetValue * 2f);
-                Vector2 orig = _result.NewPos + _collider.offset.ToVector3() + Vector3.up * (_collider.bounds.size.y / 2 - GameSettings.CollisionOffsetValue) + (Vector3.down * ySectionValue);
+                Vector2 orig = _result.NewPos +  _collider.transform.rotation * _collider.offset.ToVector3() + Vector3.up * (_collider.bounds.size.y / 2 - GameSettings.CollisionOffsetValue) + (Vector3.down * ySectionValue);
 
                 resultingPosition = GetMoveCollisionPositionHorizontal(orig, moveDirection, amount, resultingPosition);
 
@@ -218,7 +218,7 @@ namespace Entity.Base
 
             _result.Hits.AddRange(hits);
 
-            float xCollisionPos = hits.First().point.x + (-_collider.offset.x);
+            float xCollisionPos = hits.First().point.x + (-( _collider.transform.rotation * _collider.offset).x);
             return new Vector3(xCollisionPos, targetPosition.y) - direction * (_collider.bounds.size.x / 2f);
         }
 
@@ -259,7 +259,7 @@ namespace Entity.Base
                         _result.HitDown = true;
                     else
                         _result.HitUp = true;
-                    resultingPos = new Vector3(resultingPos.x, hitResult.point.y + (-_collider.offset.y)) - moveVect * (_collider.bounds.size.y / 2f);
+                    resultingPos = new Vector3(resultingPos.x, hitResult.point.y + (-( _collider.transform.rotation * _collider.offset).y)) - moveVect * (_collider.bounds.size.y / 2f);
                 }
                 else
                 {
@@ -280,9 +280,9 @@ namespace Entity.Base
                 throw new ArgumentException("Unexpected side: " + side.ToString());
 
             if (Math.Abs(side.x) > .001f)
-                return _result.NewPos + _collider.offset.ToVector3() + side * (_collider.bounds.size.x / 2 - GameSettings.CollisionOffsetValue);
+                return _result.NewPos +  _collider.transform.rotation *_collider.offset.ToVector3() + side * (_collider.bounds.size.x / 2 - GameSettings.CollisionOffsetValue);
             else
-                return _result.NewPos + _collider.offset.ToVector3() + side * (_collider.bounds.size.y / 2 - GameSettings.CollisionOffsetValue);
+                return _result.NewPos +  _collider.transform.rotation *_collider.offset.ToVector3() + side * (_collider.bounds.size.y / 2 - GameSettings.CollisionOffsetValue);
         }
     }
 }

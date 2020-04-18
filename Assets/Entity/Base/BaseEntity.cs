@@ -111,7 +111,7 @@ namespace Entity.Base
 
         public EntityMoveTester GetMoveTester(LayerMask collisionLayerMask, LayerMask oneWayLayerMask)
         {
-            return new EntityMoveTester(new EntityDebugLogger(this), BoxCollider, collisionLayerMask, oneWayLayerMask);
+            return new EntityMoveTester(new EntityDebugLogger(this),  BoxCollider, collisionLayerMask, oneWayLayerMask);
         }
 
         public void JumpDownThroughOneWay()

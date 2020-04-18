@@ -47,6 +47,9 @@ TextureImporter:
   - first:
       213: -4690534200824059534
     second: player 14
+  - first:
+      213: 467225222035841359
+    second: player 15
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -191,7 +194,7 @@ TextureImporter:
       name: player 1
       rect:
         serializedVersion: 2
-        x: 0
+        x: 48
         y: 32
         width: 48
         height: 16
@@ -212,7 +215,7 @@ TextureImporter:
       name: player 2
       rect:
         serializedVersion: 2
-        x: 48
+        x: 0
         y: 32
         width: 48
         height: 16
@@ -233,7 +236,7 @@ TextureImporter:
       name: player 3
       rect:
         serializedVersion: 2
-        x: 0
+        x: 96
         y: 32
         width: 48
         height: 16
@@ -254,7 +257,7 @@ TextureImporter:
       name: player 4
       rect:
         serializedVersion: 2
-        x: 96
+        x: 0
         y: 32
         width: 48
         height: 16
@@ -464,6 +467,27 @@ TextureImporter:
       name: player 14
       rect:
         serializedVersion: 2
+        x: 48
+        y: 0
+        width: 48
+        height: 16
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: -4690534200824059534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player 15
+      rect:
+        serializedVersion: 2
         x: 144
         y: 16
         width: 48
@@ -476,7 +500,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: -4690534200824059534
+      internalID: 467225222035841359
       vertices: []
       indices: 
       edges: []
