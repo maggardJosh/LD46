@@ -17,6 +17,11 @@
             [NonSerialized] public SpriteRenderer SRend;
             [NonSerialized] public DebugLoggerBehavior Logger;
 
+            public bool CanVine = true;
+            public bool CanDoubleJump = true;
+
+            public GameObject doubleJumpEffect;
+
             public GameObject grappleHookAnchor;
             public Transform grappleHookUpAnchor;
 

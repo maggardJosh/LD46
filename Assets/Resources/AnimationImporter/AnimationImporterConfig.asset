@@ -16,6 +16,7 @@ MonoBehaviour:
   - death
   - vineThrow
   - vineUpThrow
+  - doubleJumpEffect
   _automaticImporting: 0
   _spritePixelsPerUnit: 16
   _targetObjectType: 0

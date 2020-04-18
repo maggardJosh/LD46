@@ -6,6 +6,7 @@ namespace Entities.Player.States
     {
         public DefaultPlayerState(PlayerController controller) : base(controller) { }
 
+        private bool _hasDoubleJumped = false;
         private float _timeSinceGrounded = float.MaxValue;
         private float _jumpBuffered = float.MaxValue;
             
@@ -21,7 +22,7 @@ namespace Entities.Player.States
                 
             HandleJumpLogic();
 
-            if (HandleVineLogic())
+            if (Controller.CanVine && HandleVineLogic())
                 return;
             
             UpdateAnimator();
@@ -49,7 +50,11 @@ namespace Entities.Player.States
         {
             bool grounded = Controller.Entity.LastHitResult.HitDown;
             if (grounded && Controller.Entity.GetYVelocity() <= 0)
+            {
                 _timeSinceGrounded = 0;
+                _hasDoubleJumped = false;
+            }
+
             Controller.AnimController.SetGrounded(grounded);
             Controller.AnimController.SetXMoving(Mathf.Abs(Controller.CurrentInput.XInput) > 0f);
             Controller.AnimController.SetYSpeed(Controller.Entity.GetYVelocity());
@@ -58,6 +63,7 @@ namespace Entities.Player.States
         private void Jump()
         {
             _timeSinceGrounded = Controller.settings.allowedTimeSinceGroundedToJump;
+            _jumpBuffered = Controller.settings.jumpBufferLength;
             Controller.Entity.SetYVelocity(Controller.settings.jumpStrength);
         }
 
@@ -74,10 +80,23 @@ namespace Entities.Player.States
             
         private void HandleJumpLogic()
         {
-
-            if (_timeSinceGrounded < Controller.settings.allowedTimeSinceGroundedToJump &&
-                (Controller.CurrentInput.JumpInput && _jumpBuffered < Controller.settings.jumpBufferLength))
-                Jump();
+            bool shouldJumpAccordingToInput =
+                (Controller.CurrentInput.JumpInput && _jumpBuffered < Controller.settings.jumpBufferLength);
+            if (shouldJumpAccordingToInput)
+            {
+                if (_timeSinceGrounded < Controller.settings.allowedTimeSinceGroundedToJump)
+                {
+                    Debug.Log("Standard");
+                    Jump();
+                }
+                else if (!_hasDoubleJumped)
+                {
+                    Debug.Log("Double");
+                    _hasDoubleJumped = true;
+                    Jump();   
+                    SpawnDoubleJumpEffect();
+                }
+            }
                 
             if(!Controller.CurrentInput.JumpInput && Controller.Entity.GetYVelocity() > 0)
                 Controller.Entity.SetYVelocity(Controller.Entity.GetYVelocity()*Controller.settings.jumpLetGoMultiplier);
@@ -87,6 +106,11 @@ namespace Entities.Player.States
                 
             if (_jumpBuffered < Controller.settings.jumpBufferLength)
                 _jumpBuffered += Time.fixedDeltaTime;
+        }
+
+        private void SpawnDoubleJumpEffect()
+        {
+            Object.Instantiate(Controller.doubleJumpEffect, Controller.transform.position, Quaternion.identity);
         }
     }
 }

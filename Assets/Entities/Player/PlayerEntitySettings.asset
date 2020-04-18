@@ -15,7 +15,7 @@ MonoBehaviour:
   XBounceValue: 0
   YBounceValue: 0
   MaxXVel: 10
-  MinYVel: -10
+  MinYVel: -20
   MaxYVel: 30
   GroundFriction: 0.371
   Friction: 0.89
@@ -26,4 +26,4 @@ MonoBehaviour:
   OneWayMask:
     serializedVersion: 2
     m_Bits: 0
-  GravityMultiplier: 1
+  GravityMultiplier: 0.8

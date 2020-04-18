@@ -196,6 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3776c069e54c404b80af7e6f9f2b1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanVine: 1
+  CanDoubleJump: 1
+  doubleJumpEffect: {fileID: 5055473717368125959, guid: 017da72255c943b479febe14d556540d,
+    type: 3}
   grappleHookAnchor: {fileID: 1487811512966571231}
   grappleHookUpAnchor: {fileID: 5373295990050931354}
   settings: {fileID: 11400000, guid: 41ad1c7f2bd0b5b4fbb7e67e1dd37e8a, type: 2}
