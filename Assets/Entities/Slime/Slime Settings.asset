@@ -16,3 +16,6 @@ MonoBehaviour:
   yJumpSpeed: 7
   minJumpTime: 3
   maxJumpTime: 5
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 8192

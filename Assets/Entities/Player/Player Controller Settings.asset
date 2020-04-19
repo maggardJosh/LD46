@@ -28,3 +28,6 @@ MonoBehaviour:
   homeLayer:
     serializedVersion: 2
     m_Bits: 2048
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 512

@@ -1,7 +1,9 @@
 ﻿
     using System;
+    using System.Collections.Generic;
     using Entities.Player.States;
     using Entity.Base;
+    using Extensions;
     using Pickups;
     using UnityEngine;
 
@@ -10,7 +12,7 @@
         [RequireComponent(typeof(BaseEntity))]
         [RequireComponent(typeof(Animator))]
         [RequireComponent(typeof(DebugLoggerBehavior))]
-        public class PlayerController : MonoBehaviour
+        public class PlayerController : MonoBehaviour, IDamageable
         {
             [NonSerialized] public BaseEntity Entity;
             [NonSerialized] public PlayerAnimatorController AnimController;
@@ -21,6 +23,9 @@
             public bool CanVine = true;
             public bool CanSlam = true;
             public bool CanDoubleJump = true;
+
+            public BoxCollider2D AttackCollider;
+            public BoxCollider2D AttackUpCollider;
             
             public SpriteRenderer pickupSpriteRendered;
 
@@ -117,6 +122,47 @@
                 pickupSpriteRendered.gameObject.SetActive(false);
                 
                 FindObjectOfType<Home>()?.UpdatePlants();
+            }
+
+            public void TryDamageAttack()
+            {
+                var results = new List<Collider2D>();
+                var numHits =
+                    AttackCollider.OverlapCollider(
+                        new ContactFilter2D {useLayerMask = true, layerMask = settings.damageLayer}, results);
+                if (numHits <= 0)
+                    return;
+                foreach (var hit in results)
+                {
+                    var damageable = hit.GetComponent<IDamageable>();
+                    damageable?.TakeDamage(this);
+                }
+            }
+            
+            public void TryDamageAttackUp()
+            {
+                var results = new List<Collider2D>();
+                var numHits =
+                    AttackUpCollider.OverlapCollider(
+                        new ContactFilter2D {useLayerMask = true, layerMask = settings.damageLayer}, results);
+                if (numHits <= 0)
+                    return;
+                foreach (var hit in results)
+                {
+                    var damageable = hit.GetComponent<IDamageable>();
+                    damageable?.TakeDamage(this);
+                }
+            }
+
+            public void TakeDamage(MonoBehaviour damager)
+            {
+                if (damager == this)
+                    return;
+                if (_playerState is StunPlayerState)
+                    return;
+                var damageVect = damager.transform.position - (transform.position + Entity.BoxCollider.offset.ToVector3()) + Vector3.up;
+                damageVect = damageVect.normalized * settings.stunVelocityStrength;
+                SetPlayerState(new StunPlayerState(this, damageVect));
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Entities.Player
 {
@@ -6,7 +7,12 @@ namespace Entities.Player
     {
         public SpriteRenderer sprite;
 
-        public float xValue = .4f;
+        private float xValue = .4f;
+
+        private void Start()
+        {
+            xValue = transform.localPosition.x;
+        }
 
         // Update is called once per frame
         void Update()

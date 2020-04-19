@@ -9,5 +9,6 @@ namespace Entities.Slime
         public float yJumpSpeed = 5;
         public float minJumpTime = 3;
         public float maxJumpTime = 5;
+        public LayerMask damageLayer;
     }
 }

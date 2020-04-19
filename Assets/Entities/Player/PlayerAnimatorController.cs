@@ -15,6 +15,7 @@ namespace Entities.Player
         private static readonly int Slam = Animator.StringToHash("Slam");
         private static readonly int Attack = Animator.StringToHash("Attack");
         private static readonly int UpAttack = Animator.StringToHash("UpAttack");
+        private static readonly int Stun = Animator.StringToHash("Stun");
 
         public PlayerAnimatorController(Animator animator)
         {
@@ -77,6 +78,11 @@ namespace Entities.Player
         public void SetUpAttack(bool upAttack)
         {
             _animator.SetBool(UpAttack, upAttack);
+        }
+
+        public void SetStun(bool stun)
+        {
+            _animator.SetBool(Stun, stun);
         }
     }
 }
