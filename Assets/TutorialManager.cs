@@ -19,7 +19,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public TextMeshProUGUI tutorialLabel;
+    public Text tutorialLabel;
     private Animator _animator;
     void Awake()
     {
