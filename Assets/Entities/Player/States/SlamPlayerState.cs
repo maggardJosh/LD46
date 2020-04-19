@@ -10,6 +10,7 @@ namespace Entities.Player.States
 
         protected override void HandleEnter()
         {
+            TutorialManager.Instance.SetTutorialStep(TutorialManager.TutorialStep.SlamDone);
             Controller.AnimController.SetSlam(true);
         }
 

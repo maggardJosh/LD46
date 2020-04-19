@@ -47,7 +47,9 @@ namespace Entities.Player.States
             if (!Controller.Entity.LastHitResult.HitDown)
                 return false;
             
-            if (!Controller.CurrentInput.VineInput || Controller.LastInput.VineInput) 
+            bool shouldAttackAccordingToInput =
+                (Controller.CurrentInput.VineInput && Controller._attackBuffered < Controller.settings.attackBufferLength);
+            if (!shouldAttackAccordingToInput) 
                 return false;
             
             List<Collider2D> results = new List<Collider2D>();
@@ -179,6 +181,7 @@ namespace Entities.Player.States
                 {
                     _hasDoubleJumped = true;
                     Jump();   
+                    TutorialManager.Instance.SetTutorialStep(TutorialManager.TutorialStep.DoubleJumpDone);
                     SpawnDoubleJumpEffect();
                 }
             }
