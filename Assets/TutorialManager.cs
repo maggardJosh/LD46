@@ -29,20 +29,24 @@ public class TutorialManager : MonoBehaviour
 
     public enum TutorialStep
     {
-        Move = 0,
-        Jump = 1,
-        Attack = 2,
-        Pickup = 3,
-        ReturnPickup = 4,
-        DoubleJump = 5,
-        DoubleJumpDone = 6,
-        Slam = 7,
-        SlamDone =8,
-        Vine = 9,
-        VineDone = 10
+        Move,
+        Jump,
+        Attack,
+        AttackDone,
+        Pickup,
+        ReturnPickup,
+        DoubleJump,
+        DoubleJumpDone,
+        Slam,
+        SlamDone,
+        Vine,
+        VineDone
     }
 
     private TutorialStep _currentStep = TutorialStep.Move;
+
+    public TutorialStep CurrentStep => _currentStep;
+
     public void SetTutorialStep(TutorialStep newStep)
     {
         if(PastTutorial(newStep))

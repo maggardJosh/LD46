@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   XBounceValue: 0
   YBounceValue: 0
-  MaxXVel: 2
+  MaxXVel: 3
   MinYVel: -5
   MaxYVel: 5
   GroundFriction: 0.98

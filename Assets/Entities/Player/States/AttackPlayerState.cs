@@ -10,6 +10,8 @@ namespace Entities.Player.States
 
         protected override void HandleEnter()
         {
+            if(TutorialManager.Instance.CurrentStep == TutorialManager.TutorialStep.Attack)
+                TutorialManager.Instance.SetTutorialStep(TutorialManager.TutorialStep.AttackDone);
             Controller.AnimController.SetAttack(true);
         }
 

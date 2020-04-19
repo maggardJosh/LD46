@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87acc4c7cbe4046b688a34d13303f85, type: 3}
   m_Name: BatSettings
   m_EditorClassIdentifier: 
-  speed: 0.2
+  speed: 0.3
   damageBounceValue: 50
