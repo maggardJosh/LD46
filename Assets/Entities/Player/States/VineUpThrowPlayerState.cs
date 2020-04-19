@@ -18,6 +18,7 @@ namespace Entities.Player.States
 
         protected override void HandleEnter()
         {
+            TutorialManager.Instance.SetTutorialStep(TutorialManager.TutorialStep.VineDone);
             Controller.AnimController.SetVineUpThrow(true);
         }
 

@@ -54,7 +54,7 @@ namespace Entities.Player
 
         public PlayerInput LastInput { get; private set; } = new PlayerInput();
         public PlayerInput CurrentInput { get; private set; } = new PlayerInput();
-        public bool CarryingPickup => carryingPickupType != global::Pickups.Pickup.PickupType.None;
+        public bool CarryingPickup => carryingPickupType != Pickups.Pickup.PickupType.None;
 
         public float _attackBuffered = float.MaxValue;
         private void Update()
@@ -105,26 +105,28 @@ namespace Entities.Player
             }
         }
 
-        private Pickup.PickupType carryingPickupType = global::Pickups.Pickup.PickupType.None;
+        private Pickup.PickupType carryingPickupType = Pickups.Pickup.PickupType.None;
 
         public void Pickup(Pickup p)
         {
             carryingPickupType = p.pickupType;
             pickupSpriteRendered.gameObject.SetActive(true);
             pickupSpriteRendered.sprite = p.pickupSprite;
+            
+            TutorialManager.Instance.SetTutorialStep(TutorialManager.TutorialStep.ReturnPickup);
         }
 
         public bool CanPickup(Pickup.PickupType pickupType)
         {
             switch (pickupType)
             {
-                case global::Pickups.Pickup.PickupType.None:
+                case Pickups.Pickup.PickupType.None:
                     return false;
-                case global::Pickups.Pickup.PickupType.Slam:
+                case Pickups.Pickup.PickupType.Slam:
                     return !CanSlam;
-                case global::Pickups.Pickup.PickupType.Vine:
+                case Pickups.Pickup.PickupType.Vine:
                     return !CanVine;
-                case global::Pickups.Pickup.PickupType.DoubleJump:
+                case Pickups.Pickup.PickupType.DoubleJump:
                     return !CanDoubleJump;
             }
 
@@ -135,16 +137,19 @@ namespace Entities.Player
         {
             switch (carryingPickupType)
             {
-                case global::Pickups.Pickup.PickupType.None:
+                case Pickups.Pickup.PickupType.None:
                     break;
-                case global::Pickups.Pickup.PickupType.Slam:
+                case Pickups.Pickup.PickupType.Slam:
                     CanSlam = true;
+                    TutorialManager.Instance.SetTutorialStep(TutorialManager.TutorialStep.Slam);
                     break;
-                case global::Pickups.Pickup.PickupType.Vine:
+                case Pickups.Pickup.PickupType.Vine:
                     CanVine = true;
+                    TutorialManager.Instance.SetTutorialStep(TutorialManager.TutorialStep.Vine);
                     break;
-                case global::Pickups.Pickup.PickupType.DoubleJump:
+                case Pickups.Pickup.PickupType.DoubleJump:
                     CanDoubleJump = true;
+                    TutorialManager.Instance.SetTutorialStep(TutorialManager.TutorialStep.DoubleJump);
                     break;
             }
 
@@ -155,7 +160,7 @@ namespace Entities.Player
 
         private void ClearCarriedPickup()
         {
-            carryingPickupType = global::Pickups.Pickup.PickupType.None;
+            carryingPickupType = Pickups.Pickup.PickupType.None;
             pickupSpriteRendered.sprite = null;
             pickupSpriteRendered.gameObject.SetActive(false);
         }
