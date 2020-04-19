@@ -19,7 +19,12 @@ public class Spawner : MonoBehaviour
         if (CameraFunctions.IsOnScreen(transform.position))
             return;
 
-        if (spawnedObject == null)
+        if(spawnedObject != null)
+            if (CameraFunctions.IsWayOffScreen(transform.position))
+            {
+                Destroy(spawnedObject);
+            }
+        if (spawnedObject == null && !CameraFunctions.IsWayOffScreen(transform.position))
             spawnedObject = Instantiate(objectToSpawn, transform.position, Quaternion.identity);
     }
 
