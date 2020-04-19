@@ -40,7 +40,6 @@ namespace Entities.Player
 
             if (CollidesWithWallInstantly())
             {
-                Debug.Log("Instant wall collide");
                 OnReturnHook?.Invoke(false);
                 return;
             }
@@ -51,7 +50,7 @@ namespace Entities.Player
         private bool CollidesWithWallInstantly()
         {
             var result = _baseEntity.GetMoveTester()
-                .GetMoveResult(transform.position - _direction * .1f, _direction * .1f);
+                .GetMoveResult(transform.position - transform.rotation * _direction * 1f, transform.rotation * _direction * 1f);
             foreach (var hit in result.HorizontalHits)
                 hit.collider.GetComponent<IDamageable>()?.TakeDamage(_controller);
             foreach (var hit in result.VerticalHits)

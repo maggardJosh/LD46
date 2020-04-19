@@ -16,3 +16,7 @@ MonoBehaviour:
   collisionOffsetValue: 0.05
   gravity: 1
   randomSFXAmount: 0.1
+  explosionPrefab: {fileID: 7876144438248646921, guid: 6dcb62ac2e532ef46bd77d6dc10fc749,
+    type: 3}
+  dirtExplosionPrefab: {fileID: 7876144438248646921, guid: 7bec808e50a589c4486d774d8774a02e,
+    type: 3}

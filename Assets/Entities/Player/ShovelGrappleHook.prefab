@@ -261,5 +261,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d8479e04369644d93e5b58be85251e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugEntity: 0
+  debugEntity: 1
   settings: {fileID: 11400000, guid: 7a62a1c0419dd46488f90fa0473e7295, type: 2}
