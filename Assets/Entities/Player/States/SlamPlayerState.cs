@@ -34,7 +34,14 @@ namespace Entities.Player.States
             Controller.Entity.SetVelocity(new Vector3(0,Controller.settings.slamSpeed, 0));
             if (Controller.Entity.LastHitResult.HitDown)
             {
-                //TODO: Destroy tiles of a certain layer here
+                foreach (var f in Controller.Entity.LastHitResult.Hits)
+                {
+                    var breakableTile = f.collider.GetComponent<BreakableTile>();
+                    if (breakableTile != null)
+                    {
+                        Object.Destroy(breakableTile.gameObject);
+                    }
+                }
                 touchGroundCount += Time.fixedDeltaTime;
                 if(touchGroundCount > .2f)
                     Controller.SetPlayerState(new DefaultPlayerState(Controller));

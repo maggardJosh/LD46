@@ -22,7 +22,7 @@ MonoBehaviour:
   ObeysGravity: 1
   CollideMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4352
   OneWayMask:
     serializedVersion: 2
     m_Bits: 0
