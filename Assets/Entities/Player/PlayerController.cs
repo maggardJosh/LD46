@@ -56,10 +56,17 @@ namespace Entities.Player
         public PlayerInput CurrentInput { get; private set; } = new PlayerInput();
         public bool CarryingPickup => carryingPickupType != global::Pickups.Pickup.PickupType.None;
 
+        public float _attackBuffered = float.MaxValue;
         private void Update()
         {
             LastInput = CurrentInput;
             CurrentInput = _inputProvider.GetInput();
+            
+            if (_attackBuffered < settings.attackBufferLength)
+                _attackBuffered += Time.fixedDeltaTime;
+            if (CurrentInput.VineInput && !LastInput.VineInput)
+                _attackBuffered = 0;
+            
             _playerState.HandleUpdate();
         }
 

@@ -29,7 +29,7 @@ namespace Entities.Player.States
 
             if (Controller.CanSlam && HandleSlamLogic())
                 return;
-            if (HandleVineLogic())
+            if (HandleAttackLogic())
                 return;
             
             UpdateAnimator();
@@ -64,6 +64,7 @@ namespace Entities.Player.States
                 if (!Controller.CanPickup(pickup.pickupType))
                     continue;
                 Controller.Pickup(pickup);
+                Controller._attackBuffered = Controller.settings.attackBufferLength;
                 return true;
             }
 
@@ -95,14 +96,21 @@ namespace Entities.Player.States
             return true;
         }
 
-        private bool HandleVineLogic()
+        private bool HandleAttackLogic()
         {
+            
+            
             if (!Controller.Entity.LastHitResult.HitDown)
                 return false;
             
-            if (!Controller.CurrentInput.VineInput || Controller.LastInput.VineInput) 
+            bool shouldAttackAccordingToInput =
+                (Controller.CurrentInput.VineInput && Controller._attackBuffered < Controller.settings.attackBufferLength);
+            
+            if (!shouldAttackAccordingToInput)
                 return false;
 
+            Controller._attackBuffered = Controller.settings.attackBufferLength;
+            
             if (Controller.CurrentInput.YInput > 0)
                 Controller.SetPlayerState(GetUpAttackState());
             else
