@@ -27,11 +27,11 @@ namespace Entities.Player.States
         protected abstract void HandleFixedUpdateInternal();
 
 
-        public void OnExitState()
+        public void OnExitState(PlayerState nextState)
         {
-            HandleExit();
+            HandleExit(nextState);
         }
-        protected virtual void HandleExit() { }
+        protected virtual void HandleExit(PlayerState nextState) { }
 
         public void OnEnterState()
         {

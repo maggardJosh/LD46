@@ -14,7 +14,7 @@ namespace Entities.Player.States
             Controller.AnimController.SetSlam(true);
         }
 
-        protected override void HandleExit()
+        protected override void HandleExit(PlayerState nextState)
         {
             Controller.AnimController.SetSlam(false);
         }

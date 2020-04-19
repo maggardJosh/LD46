@@ -18,6 +18,7 @@ namespace Entities.Player
 
         public EntitySettings normalSettings;
         public EntitySettings stunSettings;
+        public EntitySettings invulnSettings;
 
         [NonSerialized] public PlayerAnimatorController AnimController;
         private IPlayerInputProvider _inputProvider;
@@ -30,7 +31,8 @@ namespace Entities.Player
 
         public BoxCollider2D AttackCollider;
         public BoxCollider2D AttackUpCollider;
-
+        public BoxCollider2D AttackSlamCollider;
+        
         public SpriteRenderer pickupSpriteRendered;
 
         public GameObject doubleJumpEffect;
@@ -56,16 +58,16 @@ namespace Entities.Player
         public PlayerInput CurrentInput { get; private set; } = new PlayerInput();
         public bool CarryingPickup => carryingPickupType != Pickups.Pickup.PickupType.None;
 
-        public float _attackBuffered = float.MaxValue;
+        [NonSerialized] public float AttackBuffered = float.MaxValue;
         private void Update()
         {
             LastInput = CurrentInput;
             CurrentInput = _inputProvider.GetInput();
             
-            if (_attackBuffered < settings.attackBufferLength)
-                _attackBuffered += Time.fixedDeltaTime;
+            if (AttackBuffered < settings.attackBufferLength)
+                AttackBuffered += Time.fixedDeltaTime;
             if (CurrentInput.VineInput && !LastInput.VineInput)
-                _attackBuffered = 0;
+                AttackBuffered = 0;
             
             _playerState.HandleUpdate();
         }
@@ -76,13 +78,38 @@ namespace Entities.Player
         {
             if (newPlayerState == null)
                 return;
-            _playerState?.OnExitState();
+            _playerState?.OnExitState(newPlayerState);
             _playerState = newPlayerState;
             _playerState.OnEnterState();
         }
 
         private void FixedUpdate()
         {
+            if (invulnCount > 0)
+            {
+                invulnCount -= Time.fixedDeltaTime;
+                var c = SRend.color;
+                if ((int) (invulnCount * 1000) % 125 < 62)
+                    c.a = .2f;
+                else
+                    c.a = 1f;
+                SRend.color = c;
+                if (!(_playerState is StunPlayerState))
+                {
+                    Entity.settings = invulnSettings;
+                }
+            }
+            else
+            {
+                var c = SRend.color;
+                c.a = 1f;
+                SRend.color = c;
+                if (!(_playerState is StunPlayerState))
+                {
+                    Entity.settings = normalSettings;
+                }
+            }
+
             _playerState.HandleFixedUpdate();
 
             foreach (var hit in Entity.LastHitResult.VerticalHits)
@@ -194,17 +221,36 @@ namespace Entities.Player
                 damageable?.TakeDamage(this);
             }
         }
+        
+        public void TryDamageAttackSlam()
+        {
+            var results = new List<Collider2D>();
+            var numHits =
+                AttackSlamCollider.OverlapCollider(
+                    new ContactFilter2D {useLayerMask = true, layerMask = settings.damageLayer}, results);
+            if (numHits <= 0)
+                return;
+            foreach (var hit in results)
+            {
+                var damageable = hit.GetComponent<IDamageable>();
+                damageable?.TakeDamage(this);
+            }
+        }
 
+        private float invulnCount = 0f;
         public void TakeDamage(MonoBehaviour damager)
         {
+            if (invulnCount > 0)
+                return;
             if (damager == this)
                 return;
-            if (_playerState is StunPlayerState)
+            if (_playerState is StunPlayerState || _playerState is SlamPlayerState)
                 return;
             var damageVect = (transform.position + Entity.BoxCollider.offset.ToVector3()) - damager.transform.position +
                              Vector3.up;
             damageVect = damageVect.normalized * settings.stunVelocityStrength;
             SetPlayerState(new StunPlayerState(this, damageVect));
+            invulnCount = settings.InvulnerabilityTime;
             if (CarryingPickup)
             {
                 SpawnPickupDiscard();

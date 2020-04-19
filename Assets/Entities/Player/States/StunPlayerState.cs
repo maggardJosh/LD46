@@ -15,7 +15,7 @@ namespace Entities.Player.States
             Controller.AnimController.SetStun(true);
         }
 
-        protected override void HandleExit()
+        protected override void HandleExit(PlayerState nextState)
         {
             Controller.Entity.settings = Controller.normalSettings;
             Controller.AnimController.SetStun(false);

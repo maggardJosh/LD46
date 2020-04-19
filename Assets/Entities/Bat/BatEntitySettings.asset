@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f38974e8c1a3bc24dbe5d26f7159caef, type: 3}
-  m_Name: Grapple Entity Settings
+  m_Name: BatEntitySettings
   m_EditorClassIdentifier: 
-  XBounceValue: -0.33
-  YBounceValue: -0.5
-  MaxXVel: 20
-  MinYVel: -20
-  MaxYVel: 20
-  GroundFriction: 1
-  Friction: 1
+  XBounceValue: 0
+  YBounceValue: 0
+  MaxXVel: 3
+  MinYVel: -5
+  MaxYVel: 5
+  GroundFriction: 0.98
+  Friction: 0.98
   ObeysGravity: 0
   CollideMask:
     serializedVersion: 2

@@ -23,9 +23,11 @@ namespace Entities.Player.States
             Controller.AnimController.SetVineThrow(true);
         }
 
-        protected override void HandleExit()
+        protected override void HandleExit(PlayerState nextState)
         {
             Controller.AnimController.SetVineThrow(false);
+            if(!(nextState is VineRetrievePlayerState) && _hook != null)
+                Object.Destroy(_hook.gameObject);
         }
 
         protected override void HandleUpdateInternal()

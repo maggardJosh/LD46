@@ -21,5 +21,6 @@ namespace Entities.Player
         public float stunVelocityStrength = 10f;
         public GameObject PickupDiscardPrefab;
         public float attackBufferLength = .2f;
+        public float InvulnerabilityTime = 3f;
     }
 }

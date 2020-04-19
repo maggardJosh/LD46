@@ -48,7 +48,7 @@ namespace Entities.Player.States
                 return false;
             
             bool shouldAttackAccordingToInput =
-                (Controller.CurrentInput.VineInput && Controller._attackBuffered < Controller.settings.attackBufferLength);
+                (Controller.CurrentInput.VineInput && Controller.AttackBuffered < Controller.settings.attackBufferLength);
             if (!shouldAttackAccordingToInput) 
                 return false;
             
@@ -66,7 +66,7 @@ namespace Entities.Player.States
                 if (!Controller.CanPickup(pickup.pickupType))
                     continue;
                 Controller.Pickup(pickup);
-                Controller._attackBuffered = Controller.settings.attackBufferLength;
+                Controller.AttackBuffered = Controller.settings.attackBufferLength;
                 return true;
             }
 
@@ -106,12 +106,12 @@ namespace Entities.Player.States
                 return false;
             
             bool shouldAttackAccordingToInput =
-                (Controller.CurrentInput.VineInput && Controller._attackBuffered < Controller.settings.attackBufferLength);
+                (Controller.CurrentInput.VineInput && Controller.AttackBuffered < Controller.settings.attackBufferLength);
             
             if (!shouldAttackAccordingToInput)
                 return false;
 
-            Controller._attackBuffered = Controller.settings.attackBufferLength;
+            Controller.AttackBuffered = Controller.settings.attackBufferLength;
             
             if (Controller.CurrentInput.YInput > 0)
                 Controller.SetPlayerState(GetUpAttackState());

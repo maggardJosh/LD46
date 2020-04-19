@@ -35,3 +35,5 @@ MonoBehaviour:
   stunVelocityStrength: 10
   PickupDiscardPrefab: {fileID: 1357309543648847822, guid: dd3b794bf044dd940996522409da5dce,
     type: 3}
+  attackBufferLength: 0.2
+  InvulnerabilityTime: 2
