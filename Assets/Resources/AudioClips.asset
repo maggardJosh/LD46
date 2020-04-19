@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f9153d9fc7447c9d1eabad37f6b521, type: 3}
+  m_Name: AudioClips
+  m_EditorClassIdentifier: 
+  Step: {fileID: 8300000, guid: e2213911e88826748a83e5651b43c85f, type: 3}
+  Swing: {fileID: 8300000, guid: 631180cc451f21f48a56c932e92caf5d, type: 3}
+  HitEnemy: {fileID: 8300000, guid: 8f70303d9b34b0f4d9e9a3e02aed38ce, type: 3}
+  GetHurt: {fileID: 8300000, guid: 1f7be31b385295f4c954abfc563748be, type: 3}
+  Land: {fileID: 8300000, guid: bb327831bbd85c046a5384cb028caa81, type: 3}
+  Jump: {fileID: 8300000, guid: 00ceb221a6430dd42810b1d5514389de, type: 3}
+  Slam: {fileID: 8300000, guid: 5316e2780965cb64fbb0e5d6810a7232, type: 3}
+  SlimeJump: {fileID: 8300000, guid: 3f6e69b83ff257144845a9b16c0f9139, type: 3}
+  BatSeePlayer: {fileID: 8300000, guid: 1526c7be6b7f6ac4ab61b12e0666fa3a, type: 3}
+  BatFlap: {fileID: 8300000, guid: 3c4346edf7024cd4b84ea6f8006caa02, type: 3}
+  VineRetrieve: {fileID: 8300000, guid: 4e900c998e3c1934faf12c802a78ae59, type: 3}
+  PickFlower: {fileID: 8300000, guid: 0c12724590de6dd4aa34be3e33b26dd9, type: 3}
+  PlantFlower: {fileID: 8300000, guid: 61330352d5e2c8f4d8bbb34a499aaaf6, type: 3}
+  DestroyTile: {fileID: 8300000, guid: cd740df142a1d8a409779f8c5ae14d36, type: 3}

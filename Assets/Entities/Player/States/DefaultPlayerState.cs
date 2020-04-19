@@ -67,6 +67,7 @@ namespace Entities.Player.States
                     continue;
                 Controller.Pickup(pickup);
                 Controller.AttackBuffered = Controller.settings.attackBufferLength;
+                AudioManager.PlayOneShot(AudioClips.Instance.PickFlower);
                 return true;
             }
 
@@ -151,6 +152,7 @@ namespace Entities.Player.States
 
         private void Jump()
         {
+            AudioManager.PlayOneShot(AudioClips.Instance.Jump);
             _timeSinceGrounded = Controller.settings.allowedTimeSinceGroundedToJump;
             _jumpBuffered = Controller.settings.jumpBufferLength;
             Controller.Entity.SetYVelocity(Controller.settings.jumpStrength);

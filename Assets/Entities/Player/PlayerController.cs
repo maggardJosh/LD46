@@ -109,6 +109,15 @@ namespace Entities.Player
                     Entity.settings = normalSettings;
                 }
             }
+            
+            if (Entity.LastHitResult.HitDown && _lastFrameYVel < -2f)
+            {
+                
+                AudioManager.PlayOneShot(AudioClips.Instance.Land);
+            }
+
+            _lastFrameYVel = Entity.GetYVelocity();
+
 
             _playerState.HandleFixedUpdate();
 
@@ -180,6 +189,7 @@ namespace Entities.Player
                     break;
             }
 
+            AudioManager.PlayOneShot(AudioClips.Instance.PlantFlower);
             ClearCarriedPickup();
 
             FindObjectOfType<Home>()?.UpdatePlants();
@@ -238,6 +248,8 @@ namespace Entities.Player
         }
 
         private float invulnCount = 0f;
+        private double _lastFrameYVel;
+
         public void TakeDamage(MonoBehaviour damager)
         {
             if (invulnCount > 0)
@@ -263,6 +275,16 @@ namespace Entities.Player
             var go = Instantiate(settings.PickupDiscardPrefab, pickupSpriteRendered.transform.position,
                 Quaternion.identity);
             go.GetComponent<PickupDiscard>().DiscardPickup(pickupSpriteRendered.sprite);
+        }
+        
+        public void PlayStepSound()
+        {
+            AudioManager.PlayOneShot(AudioClips.Instance.Step);
+        }
+
+        public void PlaySwingSound()
+        {
+            AudioManager.PlayOneShot(AudioClips.Instance.Swing);
         }
     }
 }

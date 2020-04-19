@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
             return;
 
         if(spawnedObject != null)
-            if (CameraFunctions.IsWayOffScreen(transform.position))
+            if (CameraFunctions.IsWayOffScreen(spawnedObject.transform.position))
             {
                 Destroy(spawnedObject);
             }

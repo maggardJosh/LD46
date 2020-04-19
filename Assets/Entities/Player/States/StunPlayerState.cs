@@ -6,6 +6,7 @@ namespace Entities.Player.States
     {
         public StunPlayerState(PlayerController controller, Vector3 damageVect) : base(controller)
         {
+            AudioManager.PlayOneShot(AudioClips.Instance.GetHurt);
             Controller.Entity.SetVelocity(damageVect);
         }
 

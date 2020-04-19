@@ -63,7 +63,10 @@ namespace Entities.Slime
         public void TakeDamage(MonoBehaviour damager)
         {
             if (damager is PlayerController)
+            {
                 Destroy(gameObject);
+                AudioManager.PlayOneShot(AudioClips.Instance.HitEnemy);
+            }
         }
     }
 }
