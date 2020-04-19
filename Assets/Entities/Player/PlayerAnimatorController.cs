@@ -12,6 +12,10 @@ namespace Entities.Player
         private static readonly int VineRetrieve = Animator.StringToHash("VineRetrieve");
         private static readonly int VineUpThrow = Animator.StringToHash("VineUpThrow");
         private static readonly int VineUpRetrieve = Animator.StringToHash("VineUpRetrieve");
+        private static readonly int Slam = Animator.StringToHash("Slam");
+        private static readonly int Attack = Animator.StringToHash("Attack");
+        private static readonly int UpAttack = Animator.StringToHash("UpAttack");
+        private static readonly int Stun = Animator.StringToHash("Stun");
 
         public PlayerAnimatorController(Animator animator)
         {
@@ -61,6 +65,24 @@ namespace Entities.Player
         public void SetVineUpRetrieve(bool vineRetrieve)
         {
             _animator.SetBool(VineUpRetrieve, vineRetrieve);
+        }
+
+        public void SetSlam(bool slamValue)
+        {
+            _animator.SetBool(Slam, slamValue);
+        }
+        public void SetAttack(bool attack)
+        {
+            _animator.SetBool(Attack, attack);
+        }
+        public void SetUpAttack(bool upAttack)
+        {
+            _animator.SetBool(UpAttack, upAttack);
+        }
+
+        public void SetStun(bool stun)
+        {
+            _animator.SetBool(Stun, stun);
         }
     }
 }

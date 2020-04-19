@@ -26,12 +26,12 @@ namespace Entities.Player.States
             Controller.AnimController.SetVineRetrieve(false);
         }
         
-        public override void HandleUpdate()
+        protected override void HandleUpdateInternal()
         {
             Controller.Entity.SetVelocity(Vector3.zero);
         }
         
-        public override void HandleFixedUpdate()
+        protected override void HandleFixedUpdateInternal()
         {
             var diff = (_hook.transform.position - Controller.transform.position).x > 0 ? Vector3.left : Vector3.right;
             if (_returnVineToPlayer)

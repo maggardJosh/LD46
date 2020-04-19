@@ -13,11 +13,21 @@ MonoBehaviour:
   m_Name: Player Controller Settings
   m_EditorClassIdentifier: 
   speed: 5
-  jumpStrength: 12
+  jumpStrength: 10
   allowedTimeSinceGroundedToJump: 0.1
-  jumpLetGoMultiplier: 0.7
+  jumpLetGoMultiplier: 1
   jumpBufferLength: 0.1
   shovelGrapplePrefab: {fileID: 6803197117337338850, guid: e26acde8c7fb30b408f04d674e18ef1b,
     type: 3}
   shovelGrappleUpPrefab: {fileID: 5714797967693757583, guid: 4b178047d33714946b36c542b9e918e2,
     type: 3}
+  slamSpeed: -20
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  homeLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 512
