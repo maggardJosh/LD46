@@ -19,5 +19,6 @@ namespace Entities.Player
         public LayerMask damageLayer;
         public float stunTime  = 1f;
         public float stunVelocityStrength = 10f;
+        public GameObject PickupDiscardPrefab;
     }
 }

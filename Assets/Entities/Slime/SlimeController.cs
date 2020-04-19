@@ -30,6 +30,8 @@ namespace Entities.Slime
         // Update is called once per frame
         void FixedUpdate()
         {
+            if(!CameraFunctions.IsOnScreen(transform.position))
+                return;
             if (_state == null)
                 _state = new IdleSlimeState(this);
             _state.FixedUpdate();
