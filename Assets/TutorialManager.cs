@@ -40,7 +40,8 @@ public class TutorialManager : MonoBehaviour
         Slam,
         SlamDone,
         Vine,
-        VineDone
+        VineDone,
+        Ending
     }
 
     private TutorialStep _currentStep = TutorialStep.Move;
@@ -81,7 +82,8 @@ public class TutorialManager : MonoBehaviour
         {TutorialStep.ReturnPickup, "Return flower to garden, Keep It Alive!"},
         {TutorialStep.DoubleJump, "You are now able to jump midair!"},
         {TutorialStep.Slam, "You can slam now! Down + J in midair"},
-        {TutorialStep.Vine, "You can now use vines! Up + J to get to even higher places!"}
+        {TutorialStep.Vine, "You can now use vines! Up + J to get to even higher places!"},
+        {TutorialStep.Ending, "Thank you for playing!"}
     };
 
     private static readonly int NextTutorial = Animator.StringToHash("NextTutorial");
