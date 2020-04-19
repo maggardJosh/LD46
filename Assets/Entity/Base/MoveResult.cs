@@ -11,7 +11,8 @@ namespace Entity.Base
         public bool HitDown = false;
         public Vector3 NewPos;
         public bool HitOneWay = false;
-        public readonly List<RaycastHit2D> Hits = new List<RaycastHit2D>();
+        public readonly List<RaycastHit2D> HorizontalHits = new List<RaycastHit2D>();
+        public readonly List<RaycastHit2D> VerticalHits = new List<RaycastHit2D>();
         public Vector3 StartPos;
         public bool HitAny => HitLeft || HitUp || HitDown || HitRight;
 

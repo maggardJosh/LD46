@@ -216,7 +216,7 @@ namespace Entity.Base
             else
                 _result.HitLeft = true;
 
-            _result.Hits.AddRange(hits);
+            _result.HorizontalHits.AddRange(hits);
 
             float xCollisionPos = hits.First().point.x + (-( _collider.transform.rotation * _collider.offset).x);
             return new Vector3(xCollisionPos, targetPosition.y) - direction * (_collider.bounds.size.x / 2f);
@@ -248,7 +248,7 @@ namespace Entity.Base
                     Mathf.Abs(amount.y) + GameSettings.CollisionOffsetValue);
                 if (numHits > 0)
                 {
-                    _result.Hits.AddRange(hits);
+                    _result.VerticalHits.AddRange(hits);
                     var hitResult = hits.FirstOrDefault();
                     var hitOneWay = _oneWayMask.ContainsLayer(hitResult.collider.transform.gameObject.layer);
                     if (hitOneWay)

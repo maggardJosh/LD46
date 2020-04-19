@@ -11,11 +11,13 @@ namespace Entities.Player.States
 
         protected override void HandleEnter()
         {
+            Controller.Entity.settings = Controller.stunSettings;
             Controller.AnimController.SetStun(true);
         }
 
         protected override void HandleExit()
         {
+            Controller.Entity.settings = Controller.normalSettings;
             Controller.AnimController.SetStun(false);
         }
         

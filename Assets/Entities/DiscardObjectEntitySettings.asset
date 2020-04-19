@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f38974e8c1a3bc24dbe5d26f7159caef, type: 3}
-  m_Name: PlayerEntitySettings
+  m_Name: DiscardObjectEntitySettings
   m_EditorClassIdentifier: 
-  XBounceValue: 0
-  YBounceValue: 0
-  MaxXVel: 10
+  XBounceValue: -0.134
+  YBounceValue: -0.543
+  MaxXVel: 20
   MinYVel: -20
-  MaxYVel: 30
-  GroundFriction: 0.371
-  Friction: 0.89
+  MaxYVel: 20
+  GroundFriction: 0.902
+  Friction: 1
   ObeysGravity: 1
   CollideMask:
     serializedVersion: 2
-    m_Bits: 4864
+    m_Bits: 4352
   OneWayMask:
     serializedVersion: 2
     m_Bits: 0
-  GravityMultiplier: 0.8
+  GravityMultiplier: 1

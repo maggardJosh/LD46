@@ -34,7 +34,7 @@ namespace Entities.Player.States
             Controller.Entity.SetVelocity(new Vector3(0,Controller.settings.slamSpeed, 0));
             if (Controller.Entity.LastHitResult.HitDown)
             {
-                foreach (var f in Controller.Entity.LastHitResult.Hits)
+                foreach (var f in Controller.Entity.LastHitResult.VerticalHits)
                 {
                     var breakableTile = f.collider.GetComponent<BreakableTile>();
                     if (breakableTile != null)

@@ -455,8 +455,8 @@ TextureImporter:
       name: player 12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
+        x: 48
+        y: 32
         width: 48
         height: 16
       alignment: 7
@@ -476,7 +476,7 @@ TextureImporter:
       name: player 13
       rect:
         serializedVersion: 2
-        x: 48
+        x: 0
         y: 16
         width: 48
         height: 16
@@ -497,7 +497,7 @@ TextureImporter:
       name: player 14
       rect:
         serializedVersion: 2
-        x: 48
+        x: 0
         y: 16
         width: 48
         height: 16
@@ -539,7 +539,7 @@ TextureImporter:
       name: player 16
       rect:
         serializedVersion: 2
-        x: 96
+        x: 48
         y: 16
         width: 48
         height: 16
@@ -560,7 +560,7 @@ TextureImporter:
       name: player 17
       rect:
         serializedVersion: 2
-        x: 144
+        x: 96
         y: 16
         width: 48
         height: 16
@@ -581,8 +581,8 @@ TextureImporter:
       name: player 18
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 144
+        y: 16
         width: 48
         height: 16
       alignment: 7
@@ -602,7 +602,7 @@ TextureImporter:
       name: player 19
       rect:
         serializedVersion: 2
-        x: 96
+        x: 48
         y: 16
         width: 48
         height: 16
@@ -623,7 +623,7 @@ TextureImporter:
       name: player 20
       rect:
         serializedVersion: 2
-        x: 144
+        x: 96
         y: 16
         width: 48
         height: 16
@@ -644,7 +644,7 @@ TextureImporter:
       name: player 21
       rect:
         serializedVersion: 2
-        x: 48
+        x: 0
         y: 0
         width: 48
         height: 16
@@ -665,8 +665,8 @@ TextureImporter:
       name: player 22
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 144
+        y: 16
         width: 48
         height: 16
       alignment: 7
@@ -686,7 +686,7 @@ TextureImporter:
       name: player 23
       rect:
         serializedVersion: 2
-        x: 48
+        x: 0
         y: 0
         width: 48
         height: 16
@@ -707,7 +707,7 @@ TextureImporter:
       name: player 24
       rect:
         serializedVersion: 2
-        x: 96
+        x: 48
         y: 0
         width: 48
         height: 16
@@ -728,7 +728,7 @@ TextureImporter:
       name: player 25
       rect:
         serializedVersion: 2
-        x: 144
+        x: 96
         y: 0
         width: 48
         height: 16
