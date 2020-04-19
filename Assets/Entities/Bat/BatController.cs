@@ -79,6 +79,7 @@ namespace Entities.Bat
             if (damager is PlayerController)
             {
                 Destroy(gameObject);
+                Instantiate(GameSettings.ExplosionPrefab, transform.position, Quaternion.identity);
                 AudioManager.PlayOneShot(AudioClips.Instance.HitEnemy);
             }
         }

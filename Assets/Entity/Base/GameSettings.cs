@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.ComponentModel.Design.Serialization;
+using UnityEngine;
 
 namespace Entity.Base
 {
@@ -9,6 +10,8 @@ namespace Entity.Base
         public float collisionOffsetValue = .1f;
         public float gravity = 1f;
         public  float randomSFXAmount = .1f;
+        public GameObject explosionPrefab;
+        public GameObject dirtExplosionPrefab;
 
         private static GameSettings _instance;
 
@@ -25,5 +28,7 @@ namespace Entity.Base
         public static float CollisionOffsetValue { get => Instance.collisionOffsetValue; }
         public static float Gravity { get => Instance.gravity; }
         public static float RandomSFXAmount { get => Instance.randomSFXAmount;}
+        public static GameObject ExplosionPrefab => Instance.explosionPrefab;
+        public static GameObject DirtExplosionPrefab => Instance.dirtExplosionPrefab;
     }
 }

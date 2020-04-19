@@ -18,21 +18,24 @@ public class DestroyOnTouchGround : MonoBehaviour
     private float _groundedCount = 0;
     public float timeTillDestroy = 1f;
     private SpriteRenderer _sRend;
+    public bool flash = true;
 
     void Update()
     {
-        
         if (_entity.LastHitResult.HitDown)
         {
             _groundedCount += Time.deltaTime;
-            var c = _sRend.color;
-            if ((int) (_groundedCount * 1000) % 125 < 62)
-                c.a = .2f;
-            else
-                c.a = 1f;
-            _sRend.color = c;
-            
-            if(_groundedCount > timeTillDestroy)
+            if (flash)
+            {
+                var c = _sRend.color;
+                if ((int) (_groundedCount * 1000) % 125 < 62)
+                    c.a = .2f;
+                else
+                    c.a = 1f;
+                _sRend.color = c;
+            }
+
+            if (_groundedCount > timeTillDestroy)
                 Destroy(gameObject);
         }
     }

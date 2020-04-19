@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Entity.Base;
+using UnityEngine;
 
 namespace Entities.Player.States
 {
@@ -47,6 +48,8 @@ namespace Entities.Player.States
                     if (breakableTile != null)
                     {
                         Object.Destroy(breakableTile.gameObject);
+                        Object.Instantiate(GameSettings.DirtExplosionPrefab, breakableTile.gameObject.transform.position,
+                            Quaternion.identity);
                     }
                 }
                 touchGroundCount += Time.fixedDeltaTime;
