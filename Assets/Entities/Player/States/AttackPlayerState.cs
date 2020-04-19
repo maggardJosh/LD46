@@ -13,7 +13,7 @@ namespace Entities.Player.States
             Controller.AnimController.SetAttack(true);
         }
 
-        protected override void HandleExit()
+        protected override void HandleExit(PlayerState nextState)
         {
             Controller.AnimController.SetAttack(false);
         }

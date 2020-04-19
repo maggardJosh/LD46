@@ -22,9 +22,11 @@ namespace Entities.Player.States
             Controller.AnimController.SetVineUpThrow(true);
         }
 
-        protected override void HandleExit()
+        protected override void HandleExit(PlayerState nextState)
         {
             Controller.AnimController.SetVineUpThrow(false);
+            if(!(nextState is VineUpRetrievePlayerState) && _hook != null)
+                Object.Destroy(_hook.gameObject);
         }
 
         protected override void HandleUpdateInternal()

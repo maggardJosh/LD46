@@ -22,10 +22,11 @@ namespace Entities.Player.States
             Controller.Entity.enabled = false;
         }
 
-        protected override void HandleExit()
+        protected override void HandleExit(PlayerState nextState)
         {
             Controller.AnimController.SetVineUpRetrieve(false);
             Controller.Entity.enabled = true;
+            Object.Destroy(_hook.gameObject);
         }
         
         protected override void HandleUpdateInternal()
@@ -49,7 +50,6 @@ namespace Entities.Player.States
             if (Mathf.Abs((_hook.transform.position - Controller.transform.position).y) < .4f)
             {
                 Controller.SetPlayerState(new DefaultPlayerState(Controller));
-                Object.Destroy(_hook.gameObject);
             }
         }
     }

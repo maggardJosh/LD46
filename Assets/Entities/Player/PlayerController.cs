@@ -76,7 +76,7 @@ namespace Entities.Player
         {
             if (newPlayerState == null)
                 return;
-            _playerState?.OnExitState();
+            _playerState?.OnExitState(newPlayerState);
             _playerState = newPlayerState;
             _playerState.OnEnterState();
         }

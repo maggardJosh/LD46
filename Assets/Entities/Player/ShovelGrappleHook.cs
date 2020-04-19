@@ -1,4 +1,5 @@
-﻿using Entities.Player.States;
+﻿using System.Collections.Generic;
+using Entities.Player.States;
 using Entity.Base;
 using UnityEngine;
 
@@ -16,18 +17,18 @@ namespace Entities.Player
 
         public delegate void ReturnHook(bool hitSomething);
 
-        public event ReturnHook OnReturnHook ;
+        public event ReturnHook OnReturnHook;
 
         void Awake()
         {
             _baseEntity = GetComponent<BaseEntity>();
             _startPos = transform.position;
         }
-        
+
         private BaseEntity _baseEntity;
         private PlayerController _controller;
         public SpriteRenderer vine;
-        
+
         private bool _hasBeenActivated = false;
         private Vector3 _direction;
 
@@ -39,6 +40,7 @@ namespace Entities.Player
 
             if (CollidesWithWallInstantly())
             {
+                Debug.Log("Instant wall collide");
                 OnReturnHook?.Invoke(false);
                 return;
             }
@@ -48,7 +50,12 @@ namespace Entities.Player
 
         private bool CollidesWithWallInstantly()
         {
-            var result = _baseEntity.GetMoveTester().GetMoveResult(transform.position - _direction * .1f, _direction * .1f);
+            var result = _baseEntity.GetMoveTester()
+                .GetMoveResult(transform.position - _direction * .1f, _direction * .1f);
+            foreach (var hit in result.HorizontalHits)
+                hit.collider.GetComponent<IDamageable>()?.TakeDamage(_controller);
+            foreach (var hit in result.VerticalHits)
+                hit.collider.GetComponent<IDamageable>()?.TakeDamage(_controller);
             return result.HitAny;
         }
 
@@ -71,12 +78,21 @@ namespace Entities.Player
             _baseEntity.SetVelocity(Vector3.zero);
             if (!_hasBeenActivated)
                 return;
-            
+
             _baseEntity.SetVelocity(transform.rotation * _direction * speed);
 
             if (_baseEntity.LastHitResult.HitAny)
             {
-                OnReturnHook?.Invoke(true);
+                IDamageable damageableEnemy = GetDamageableEnemy(_baseEntity.LastHitResult.HorizontalHits,
+                    _baseEntity.LastHitResult.VerticalHits);
+                if (damageableEnemy != null)
+                {
+                    damageableEnemy.TakeDamage(_controller);
+                    OnReturnHook?.Invoke(false);
+                }
+                else
+                    OnReturnHook?.Invoke(true);
+
                 _hasBeenActivated = false;
                 return;
             }
@@ -90,7 +106,24 @@ namespace Entities.Player
             }
         }
 
-       
-    }  
-} 
- 
+        private IDamageable GetDamageableEnemy(List<RaycastHit2D> horizontalHits, List<RaycastHit2D> verticalHits)
+        {
+            IDamageable damageableEnemy = null;
+            foreach (var hit in horizontalHits)
+            {
+                damageableEnemy = hit.collider.GetComponent<IDamageable>();
+                if (damageableEnemy != null)
+                    return damageableEnemy;
+            }
+
+            foreach (var hit in verticalHits)
+            {
+                damageableEnemy = hit.collider.GetComponent<IDamageable>();
+                if (damageableEnemy != null)
+                    return damageableEnemy;
+            }
+
+            return null;
+        }
+    }
+}
