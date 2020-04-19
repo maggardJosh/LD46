@@ -38,17 +38,24 @@ namespace Entities.Slime
 
         private void CheckDamagePlayer()
         {
-             var results = new List<Collider2D>();
-             var numHits =
-                 _collider.OverlapCollider(
-                     new ContactFilter2D {useLayerMask = true, layerMask = settings.damageLayer}, results);
-             if (numHits <= 0)
-                 return;
-             foreach (var hit in results)
-             {
-                 var damageable = hit.GetComponent<IDamageable>();
-                 damageable?.TakeDamage(this);
-             }
+            foreach (var h in Entity.LastHitResult.HorizontalHits)
+            {
+                var pc = h.collider.GetComponent<PlayerController>();
+                if (pc == null)
+                    continue;
+                pc.TakeDamage(this);
+            }
+            
+            foreach (var h in Entity.LastHitResult.VerticalHits)
+            {
+                var pc = h.collider.GetComponent<PlayerController>();
+                if (pc == null)
+                    continue;
+                if(Entity.LastHitResult.HitDown)
+                    pc.TakeDamage(this);
+                else
+                    pc.Entity.SetYVelocity(Mathf.Max(7,Mathf.Abs(pc.Entity.GetYVelocity())));
+            }
         }
 
         public void TakeDamage(MonoBehaviour damager)

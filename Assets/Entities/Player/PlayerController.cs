@@ -2,6 +2,7 @@
     using System;
     using System.Collections.Generic;
     using Entities.Player.States;
+    using Entities.Slime;
     using Entity.Base;
     using Extensions;
     using Pickups;
@@ -77,6 +78,29 @@
             private void FixedUpdate()
             {
                 _playerState.HandleFixedUpdate();
+
+                foreach (var hit in Entity.LastHitResult.VerticalHits)
+                {
+                    var sc = hit.collider.GetComponent<SlimeController>();
+                    if (sc != null)
+                    {
+                        if(Entity.LastHitResult.HitDown)
+                            Entity.SetYVelocity(7f);
+                        
+                    }
+                    
+                }
+                
+                foreach (var hit in Entity.LastHitResult.HorizontalHits)
+                {
+                    var sc = hit.collider.GetComponent<SlimeController>();
+                    if (sc != null)
+                    {
+                        TakeDamage(sc);
+                        
+                    }
+                    
+                }
             }
 
             private Pickup.PickupType carryingPickupType = global::Pickups.Pickup.PickupType.None;
