@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Pickups;
+using UnityEngine;
 
 namespace Entities.Player.States
 {
@@ -22,6 +24,9 @@ namespace Entities.Player.States
                 
             HandleJumpLogic();
 
+            if (HandlePickupLogic())
+                return;
+
             if (Controller.CanSlam && HandleSlamLogic())
                 return;
             if (HandleVineLogic())
@@ -29,6 +34,50 @@ namespace Entities.Player.States
             
             UpdateAnimator();
                 
+        }
+
+        private bool HandlePickupLogic()
+        {
+            if (Controller.CarryingPickup)
+            {
+                CheckHomeCollisionForPickup();
+                return false;
+            }
+            
+            if (!Controller.Entity.LastHitResult.HitDown)
+                return false;
+            
+            if (!Controller.CurrentInput.VineInput || Controller.LastInput.VineInput) 
+                return false;
+            
+            List<Collider2D> results = new List<Collider2D>();
+            int numHits = Controller.Entity.BoxCollider.OverlapCollider(
+                new ContactFilter2D {useLayerMask = true, layerMask = Controller.settings.pickupLayer}, results);
+            if (numHits == 0)
+                return false;
+
+            foreach (var r in results)
+            {
+                var pickup = r.GetComponent<Pickup>();
+                if (pickup == null)
+                    continue;
+                if (!Controller.CanPickup(pickup.pickupType))
+                    continue;
+                Controller.Pickup(pickup);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void CheckHomeCollisionForPickup()
+        {
+            List<Collider2D> results = new List<Collider2D>();
+            int numHits = Controller.Entity.BoxCollider.OverlapCollider(
+                new ContactFilter2D {useLayerMask = true, layerMask = Controller.settings.homeLayer}, results);
+            if (numHits > 0)
+                Controller.ApplyPickup();
+
         }
 
         private bool HandleSlamLogic()
@@ -118,7 +167,7 @@ namespace Entities.Player.States
                 {
                     Jump();
                 }
-                else if (!_hasDoubleJumped)
+                else if (Controller.CanDoubleJump && !_hasDoubleJumped)
                 {
                     _hasDoubleJumped = true;
                     Jump();   

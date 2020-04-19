@@ -14,5 +14,7 @@ namespace Entities.Player
         public GameObject shovelGrapplePrefab;
         public GameObject shovelGrappleUpPrefab;
         public float slamSpeed = -10;
+        public LayerMask pickupLayer;
+        public LayerMask homeLayer;
     }
 }
