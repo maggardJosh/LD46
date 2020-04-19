@@ -53,7 +53,7 @@ namespace Entities.Slime
 
         public void TakeDamage(MonoBehaviour damager)
         {
-            if(damager is PlayerController)
+            if (damager is PlayerController)
                 Destroy(gameObject);
         }
     }

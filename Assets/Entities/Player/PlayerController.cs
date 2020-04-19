@@ -15,6 +15,10 @@
         public class PlayerController : MonoBehaviour, IDamageable
         {
             [NonSerialized] public BaseEntity Entity;
+
+            public EntitySettings normalSettings;
+            public EntitySettings stunSettings;
+            
             [NonSerialized] public PlayerAnimatorController AnimController;
             private IPlayerInputProvider _inputProvider;
             [NonSerialized] public SpriteRenderer SRend;
@@ -117,11 +121,16 @@
                         break;
                 }
 
+                ClearCarriedPickup();
+
+                FindObjectOfType<Home>()?.UpdatePlants();
+            }
+
+            private void ClearCarriedPickup()
+            {
                 carryingPickupType = global::Pickups.Pickup.PickupType.None;
                 pickupSpriteRendered.sprite = null;
                 pickupSpriteRendered.gameObject.SetActive(false);
-                
-                FindObjectOfType<Home>()?.UpdatePlants();
             }
 
             public void TryDamageAttack()
@@ -160,9 +169,10 @@
                     return;
                 if (_playerState is StunPlayerState)
                     return;
-                var damageVect = damager.transform.position - (transform.position + Entity.BoxCollider.offset.ToVector3()) + Vector3.up;
+                var damageVect = (transform.position + Entity.BoxCollider.offset.ToVector3()) - damager.transform.position + Vector3.up;
                 damageVect = damageVect.normalized * settings.stunVelocityStrength;
                 SetPlayerState(new StunPlayerState(this, damageVect));
+                ClearCarriedPickup();
             }
         }
     }
