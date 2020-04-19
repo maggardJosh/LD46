@@ -15,3 +15,4 @@ MonoBehaviour:
   tileSize: 16
   collisionOffsetValue: 0.05
   gravity: 1
+  randomSFXAmount: 0.1

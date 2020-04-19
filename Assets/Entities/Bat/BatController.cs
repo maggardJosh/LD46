@@ -48,7 +48,14 @@ namespace Entities.Bat
         private void CheckSeenPlayer()
         {
             _seenPlayer = sightCollider.bounds.Intersects(_pc.Entity.BoxCollider.bounds);
+            if(_seenPlayer)
+                AudioManager.PlayOneShot(AudioClips.Instance.BatSeePlayer);
             _animator.SetBool(Active, _seenPlayer);
+        }
+
+        public void PlayFlapSound()
+        {
+            AudioManager.PlayOneShot(AudioClips.Instance.BatFlap);
         }
 
         private void MoveTowardsPlayer()
@@ -70,7 +77,10 @@ namespace Entities.Bat
         public void TakeDamage(MonoBehaviour damager)
         {
             if (damager is PlayerController)
+            {
                 Destroy(gameObject);
+                AudioManager.PlayOneShot(AudioClips.Instance.HitEnemy);
+            }
         }
     }
 }

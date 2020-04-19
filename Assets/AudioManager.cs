@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Entity.Base;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -46,11 +48,25 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public Dictionary<AudioClip, DateTime> lastPlayed = new Dictionary<AudioClip, DateTime>();
+    [SerializeField] private int MinMillisecondsBetweenSameAudioClip;
+
     public static void PlayOneShot(AudioClip ac)
     {
+        if (AudioClipPlayedTooRecently(ac))
+            return;
+        Instance.lastPlayed[ac] = DateTime.Now;
         if (!Instance.sfxAudioSource.isPlaying)
             Instance.sfxAudioSource.pitch = 1.0f + Random.Range(-GameSettings.RandomSFXAmount, GameSettings.RandomSFXAmount);
+        
         Instance.sfxAudioSource.PlayOneShot(ac);
+    }
+
+    private static bool AudioClipPlayedTooRecently(AudioClip ac)
+    {
+        if (!Instance.lastPlayed.ContainsKey(ac))
+            return false;
+        return Instance.lastPlayed[ac] > DateTime.Now - TimeSpan.FromMilliseconds(Instance.MinMillisecondsBetweenSameAudioClip);
     }
 
     public void ToggleMusicSound()

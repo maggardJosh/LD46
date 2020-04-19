@@ -9,6 +9,7 @@ namespace Entities.Slime
             float xSpeed = Controller.settings.xJumpSpeed;
             if (Random.Range(0, 2) == 1)
                 xSpeed *= -1;
+            AudioManager.PlayOneShot(AudioClips.Instance.SlimeJump);
             controller.Entity.SetVelocity(new Vector3(xSpeed, Controller.settings.yJumpSpeed, 0));
         }
 

@@ -25,6 +25,7 @@ namespace Entities.Player.States
         }
 
         private float touchGroundCount = 0;
+        private bool playedSound = false;
         protected override void HandleFixedUpdateInternal()
         {
             if(timeInState < .15f)
@@ -35,6 +36,11 @@ namespace Entities.Player.States
             Controller.Entity.SetVelocity(new Vector3(0,Controller.settings.slamSpeed, 0));
             if (Controller.Entity.LastHitResult.HitDown)
             {
+                if(!playedSound)
+                {
+                    AudioManager.PlayOneShot(AudioClips.Instance.DestroyTile);
+                    playedSound = true;
+                }
                 foreach (var f in Controller.Entity.LastHitResult.VerticalHits)
                 {
                     var breakableTile = f.collider.GetComponent<BreakableTile>();
